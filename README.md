@@ -7,7 +7,7 @@
 ### Intro
 
 1. **Since I currently don't have access to any GPU resources, I only tried several relatively simple conv models. The codes/logs are pushed to the forked repository on Github.** (the log was a copy-paste from the terminal - I forgot to log it during training.)
-2. Codes can be found at ==/mnist/part2-twodigit/*==
+2. Codes can be found at **/mnist/part2-twodigit/***
 
 
 ### My Answer:
