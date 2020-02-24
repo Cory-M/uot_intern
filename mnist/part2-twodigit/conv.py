@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from train_utils import batchify_data, run_epoch, train_model, Flatten
 import utils_multiMNIST as U
 import pdb
-
+import os
 
 
 path_to_data_dir = '../Datasets/'
@@ -13,7 +13,7 @@ use_mini_dataset = True
 
 batch_size = 64
 nb_classes = 10
-nb_epoch = 30
+nb_epoch = 8
 num_classes = 10
 img_rows, img_cols = 42, 28 # input image dimensions
 
@@ -24,19 +24,19 @@ class CNN(nn.Module):
 	def __init__(self, input_dimension):
 		super(CNN, self).__init__()
 		self.feature = nn.Sequential(
-					nn.Conv2d(1, 32, 3, 1, 0), #40*26
+					nn.Conv2d(1, 32, 3, 1, 0),
 					nn.BatchNorm2d(32),
 					nn.ReLU(),
 	
-					nn.Conv2d(32, 64, 3, 1, 0), #38*24
+					nn.Conv2d(32, 64, 3, 1, 0),
 					nn.BatchNorm2d(64),
 					nn.ReLU(),
-					nn.MaxPool2d(2, 2), #19, 12
+					nn.MaxPool2d(2, 2),
 
-					nn.Conv2d(64, 64, 3, 1, 0), #17*10
+					nn.Conv2d(64, 64, 3, 1, 0),
 					nn.BatchNorm2d(64),
 					nn.ReLU(),
-					nn.MaxPool2d(2, 2)) #8*5
+					nn.MaxPool2d(2, 2))
 
 		self.fc = nn.Sequential(
 					nn.Linear(2560, 128),
@@ -78,7 +78,7 @@ def main():
 	model = CNN(input_dimension) # TODO add proper layers to CNN class above
 
 	# Train
-	train_model(train_batches, dev_batches, model)
+	train_model(train_batches, dev_batches, model, n_epochs=nb_epoch)
 
 	## Evaluate the model on test data
 	loss, acc = run_epoch(test_batches, model.eval(), None)
